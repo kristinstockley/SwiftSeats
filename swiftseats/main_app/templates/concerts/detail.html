@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <h1>{{ concert.title }}</h1>
+  <p>Artist: {{ concert.artist }}</p>
+  <p>Date: {{ concert.date }}</p>
+  <p>Location: {{ concert.location }}</p>
+  <p>Description: {{ concert.description }}</p>
+  <a href="{% url 'index' %}" class="btn btn-primary">Back to Concerts</a>
+  
+{% endblock %}
