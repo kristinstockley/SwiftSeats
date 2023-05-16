@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  
+  {% if wishlist %}
+    <h1>Tickets in Wishlist</h1>
+    <br>
+    {% for ticket in wishlist.tickets.all %}
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Concert: {{ ticket.concert.title }}</h5>
+        <p class="card-text">Price: {{ ticket.price }}</p>
+        <p class="card-text">Seat Number: {{ ticket.seat_number }}</p>
+        <form method="post" action="{% url 'wishlist-remove' ticket.id %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Remove from Wishlist</button>
+        </form>
+      </div>
+    </div>
+    <br>
+    {% endfor %}
+  {% else %}
+    <h1>Wishlist</h1>
+    <p>Your wishlist is empty.</p>
+  {% endif %}
+  
+  <a href="{% url 'index' %}" class="btn btn-primary">Back to Concerts</a>
+{% endblock %}

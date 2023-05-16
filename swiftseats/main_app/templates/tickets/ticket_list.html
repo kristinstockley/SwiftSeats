@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Ticket List</h1>
+  <div class="container">
+    <div class="row">
+      {% for ticket in tickets %}
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title">{{ ticket.concert.title }}</h5>
+              <p class="card-text">Price: ${{ ticket.price }}</p>
+              <p class="card-text">Seat Number: {{ ticket.seat_number }}</p>
+              <form action="{% url 'add-to-wishlist' ticket.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Add to Wishlist</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <p>No tickets available.</p>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
+
