@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  
+
+
+{% if concerts %}
+
   <h1 class="pb-2 border-bottom">Attended Concerts</h1>
   {% for concert in attended_concerts %}
     <div class="card mb-3">
@@ -10,11 +13,19 @@
         <p class="card-text">Artist: {{ concert.artist }}</p>
         <p class="card-text">Date: {{ concert.date }}</p>
         <p class="card-text">Venue: {{ concert.venue }}</p>
-        <form method="post" action="{% url 'concert-delete' concert.id %}">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-primary">Delete</button>
-        </form>
+        <div class="btn-group">
+          <a href="{% url 'edit-concert' concert.id %}" class="btn btn-primary">Edit</a>
+          <form method="post" action="{% url 'concert-delete' concert.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </div>
       </div>
     </div>
-  {% endfor %}
+    {% endfor %}
+  </div>
+</div>
+{% else %}
+<h1>No attended concerts found.</h1>
+{% endif %}
 {% endblock %}
