@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags %} <!-- Add this line to load crispy_forms_tags -->
+{% load crispy_forms_tags %}
 
 {% block content %}
 
@@ -41,9 +41,12 @@
   </div>
   <br>
 
-  <input type="submit" class="btn" value="Sign Up">
+  <input type="submit" class="btn btn-primary" value="Sign Up">
 </form>
+<br>
 
-<p>Already have an account? <a href="{% url 'login' %}">Log in</a></p>
+<h4>Already have an account? 
+  <br>
+  <a class="btn btn-primary" href="{% url 'login' %}">Log in</a></h4>
 
 {% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  
+  <h1 class="pb-2 border-bottom">Attended Concerts</h1>
+  {% for concert in attended_concerts %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <h3 class="card-title">{{ concert.title }}</h3>
+        <p class="card-text">Artist: {{ concert.artist }}</p>
+        <p class="card-text">Date: {{ concert.date }}</p>
+        <p class="card-text">Venue: {{ concert.venue }}</p>
+        <form method="post" action="{% url 'concert-delete' concert.id %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary">Delete</button>
+        </form>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}

@@ -13,16 +13,19 @@
         <p class="card-text">Seat Number: {{ ticket.seat_number }}</p>
         <form method="post" action="{% url 'wishlist-remove' ticket.id %}">
           {% csrf_token %}
-          <button type="submit" class="btn btn-danger">Remove from Wishlist</button>
+          <button type="submit" class="btn btn-primary">Remove from Wishlist</button>
         </form>
       </div>
     </div>
     <br>
+    
     {% endfor %}
   {% else %}
+
     <h1>Wishlist</h1>
     <p>Your wishlist is empty.</p>
   {% endif %}
-  
-  <a href="{% url 'index' %}" class="btn btn-primary">Back to Concerts</a>
+  <button> <a href="{% url 'index' %}" class="btn btn-primary">Back to Concerts</a></button>
+
+
 {% endblock %}

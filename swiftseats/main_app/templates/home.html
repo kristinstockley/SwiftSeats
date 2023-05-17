@@ -1,12 +1,65 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="container">
-    <div class="jumbotron">
-      <h1 class="display-4">Welcome to SwiftSeats</h1>
-      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed mauris non lacus ullamcorper aliquam.</p>
-      <hr class="my-4">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vehicula tincidunt est id sagittis. Duis ac dui id ligula laoreet cursus. Sed eu ante nec leo pulvinar feugiat.</p>
+
+<header class="masthead text-center text-white">
+<div class="px-4 py-5 my-5 text-center">
+  <h1 class="masthead-heading mb-0">SwiftSeats</h1>
+  <div class="col-lg-6 mx-auto">
+    <br>
+    <h2 class="masthead-subheading mb-0">A platform where Swifties can discover & track their Taylor Swift concerts</h2>
+    <br>
+
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <a class="btn btn-outline-secondary btn-lg px-4" href="#scroll">Learn More</a>
     </div>
   </div>
+</div>
+
+</header>
+
+<section id="scroll">
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center">
+            <div class="col-lg-6 order-lg-2">
+                <div class="p-5"><img class="img-fluid rounded-circle" src="static/images/erastour.png" alt="..." /></div>
+            </div>
+            <div class="col-lg-6 order-lg-1">
+                <div class="p-5">
+                    <h2 class="display-4">Browse a collection of concerts</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center">
+            <div class="col-lg-6">
+                <div class="p-5"><img class="img-fluid rounded-circle" src="static/images/reptour.jpg" alt="..." /></div>
+            </div>
+            <div class="col-lg-6">
+                <div class="p-5">
+                    <h2 class="display-4">Add concerts to your attended list</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center">
+            <div class="col-lg-6 order-lg-2">
+                <div class="p-5"><img class="img-fluid rounded-circle" src="static/images/eras.png" alt="..." /></div>
+            </div>
+            <div class="col-lg-6 order-lg-1">
+                <div class="p-5">
+                    <h2 class="display-4">Manage your wishlist of tickets</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
