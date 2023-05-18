@@ -1,6 +1,4 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
-
 {% block content %}
 
 <h1>Sign Up</h1>
@@ -12,7 +10,9 @@
   
   <div class="form-group">
     <label for="{{ form.username.id_for_label }}">Username:</label>
-    {{ form.username|as_crispy_field }}
+    <br>
+    {{ form.username}}
+    <br>
     <small class="form-text text-muted">
       Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
     </small>
@@ -22,7 +22,9 @@
   
   <div class="form-group">
     <label for="{{ form.password1.id_for_label }}">Password:</label>
-    {{ form.password1|as_crispy_field }}
+    <br>
+    {{ form.password1}}
+    <br>
     <small class="form-text text-muted">
       Your password can’t be too similar to your other personal information.<br>
       Your password must contain at least 8 characters.<br>
@@ -34,7 +36,9 @@
   
   <div class="form-group">
     <label for="{{ form.password2.id_for_label }}">Password confirmation:</label>
-    {{ form.password2|as_crispy_field }}
+    <br>
+    {{ form.password2}}
+    <br>
     <small class="form-text text-muted">
       Enter the same password as before, for verification.
     </small>
@@ -50,3 +54,4 @@
   <a class="btn btn-primary" href="{% url 'login' %}">Log in</a></h4>
 
 {% endblock %}
+
