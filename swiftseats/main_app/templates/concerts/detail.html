@@ -14,4 +14,10 @@
   <div>
     <a href="{% url 'index' %}" class="btn btn-primary">Back to Concerts</a>
   </div>
+  <div>
+    <form method="post" action="{% url 'add-to-attended' concert.id %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary">Add to Attended</button>
+    </form>
+  </div>
 {% endblock %}

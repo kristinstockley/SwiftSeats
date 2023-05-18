@@ -27,7 +27,7 @@
                 <a class="nav-link" href="{% url 'index' %}">Upcoming Concerts</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'user-concerts' %}">Attended Concerts</a>
+                <a class="nav-link" href="{% url 'user-concerts' user.id %}">Attended Concerts</a>
               </li>
               <li class="nav-item">
                 <li class="nav-item">

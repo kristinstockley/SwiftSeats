@@ -15,17 +15,26 @@
           <p class="card-text">Venue: {{ concert.venue }}</p>
           <div class="btn-group">
             <a href="{% url 'edit-concert' concert.id %}" class="btn btn-primary">Edit</a>
-            <form method="post" action="{% url 'concert-delete' concert.id %}">
-              {% csrf_token %}
-              <button type="submit" class="btn btn-primary" style="margin-left: 20px;">Delete</button>
-            </form>
+            <a href="{% url 'concert-delete' concert.id %}" class="btn btn-primary" style="margin-left: 20px;">Delete Concert</a>
           </div>
           <br>
-          {% for photo in concert.photo_set.all %}
-            <img class="responsive-img card-panel" src="{{photo.url}}" alt="Concert Photo">
-          {% empty %}
-            <div class="card-panel teal-text center-align">No Photos Uploaded</div>
-          {% endfor %}
+          <div class="row">
+            {% for photo in concert.photo_set.all %}
+              <div class="col-md-3">
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <img class="img-thumbnail" src="{{photo.url}}" alt="Concert Photo" style="max-width: 200px; max-height: 200px;">
+                    <form method="POST" action="{% url 'delete-photo' photo.id %}">
+                      {% csrf_token %}
+                      <button class="btn btn-primary" type="submit">Delete Photo</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            {% empty %}
+              <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+            {% endfor %}
+          </div>
           <br>
           <form action="{% url 'add_photo' concert.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
             {% csrf_token %}
@@ -42,3 +51,4 @@
   {% endif %}
 
 {% endblock %}
+
