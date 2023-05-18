@@ -1,12 +1,16 @@
+import os
+import uuid
+import boto3
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Concert, Ticket, Wishlist
+from .models import Concert, Ticket, Wishlist, Photo
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import ListView, UpdateView
 from django.contrib.auth.decorators import login_required
-from faker import Faker
 from .forms import CreateConcertForm, EditConcertForm
+
+
 
 
 def home(request):
@@ -104,22 +108,6 @@ class TicketUpdateView(UpdateView):
     context_object_name = 'ticket'
 
 
-def generate_fake_tickets(request):
-    fake = Faker()
-    concerts = Concert.objects.all()
-    tickets = []
-
-    for concert in concerts:
-        for _ in range(10):
-            price = fake.random_int(min=10, max=100)
-            seat_number = fake.random_int(min=100, max=999)
-            ticket = Ticket(price=price, seat_number=seat_number, concert=concert)
-            tickets.append(ticket)
-
-    Ticket.objects.bulk_create(tickets)
-    return redirect('ticket-list')
-
-
 @login_required
 def create_concert(request):
     if request.method == 'POST':
@@ -154,3 +142,22 @@ def edit_concert(request, concert_id):
     else:
         form = EditConcertForm(instance=concert)
         return render(request, 'main_app/edit_concert.html', {'form': form, 'concert': concert})
+    
+
+
+
+def add_photo(request, concert_id):
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            bucket = os.environ['S3_BUCKET']
+            s3.upload_fileobj(photo_file, bucket, key)
+            url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+            Photo.objects.create(url=url, concert_id=concert_id)
+        except Exception as e:
+            print('An error occurred uploading file to S3')
+            print(e)
+            
+        return redirect('user-concerts')

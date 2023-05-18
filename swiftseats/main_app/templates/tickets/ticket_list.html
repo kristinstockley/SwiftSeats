@@ -9,6 +9,7 @@
           <div class="card mb-4">
             <div class="card-body">
               <h5 class="card-title">{{ ticket.concert.title }}</h5>
+              <p>{{ ticket.concert.date }}</p>
               <p class="card-text">Price: ${{ ticket.price }}</p>
               <p class="card-text">Seat Number: {{ ticket.seat_number }}</p>
               <form action="{% url 'add-to-wishlist' ticket.id %}" method="POST">

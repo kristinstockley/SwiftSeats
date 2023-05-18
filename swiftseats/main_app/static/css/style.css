@@ -102,15 +102,3 @@ footer{
   border-color: #ffc0cb;
   color: white;
 }
-
-.btn-danger {
-  background-color: #2a153d;
-  border-color: #2a153d;
-  transition: background-color 0.3s, border-color 0.3s;
-}
-
-.btn-danger:hover,
-.btn-danger:focus {
-  background-color: #ffc0cb;
-  border-color: #ffc0cb;
-}

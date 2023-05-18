@@ -25,7 +25,9 @@
     <h1>Wishlist</h1>
     <p>Your wishlist is empty.</p>
   {% endif %}
-  <button> <a href="{% url 'index' %}" class="btn btn-primary">Back to Concerts</a></button>
+  <div class="button-container">
+    <a href="{% url 'index' %}" class="btn btn-primary">Back to Concerts</a>
+  </div>
 
 
 {% endblock %}

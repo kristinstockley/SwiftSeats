@@ -6,13 +6,12 @@
   <p>Date: {{ concert.date }}</p>
   <p>Venue: {{ concert.venue }}</p>
   <p>Description: {{ concert.description }}</p>
-  
-<div>
-  <button><a href="{% url 'ticket-list' %}?concert_id={{ concert.id }}" class="btn btn-primary">View Tickets</a></button>
-</div>
-<br>
-<div>
-  <button><a href="{% url 'index' %}" class="btn btn-primary">Back to Concerts</a></button>
-</div>
 
+  <div>
+    <a href="{% url 'ticket-list' %}?concert_id={{ concert.id }}" class="btn btn-primary">View Tickets</a>
+  </div>
+  <br>
+  <div>
+    <a href="{% url 'index' %}" class="btn btn-primary">Back to Concerts</a>
+  </div>
 {% endblock %}
