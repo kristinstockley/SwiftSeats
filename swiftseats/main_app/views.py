@@ -9,9 +9,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.urls import reverse_lazy
-from datetime import date
+from django.forms import DateInput
 from .forms import CreateConcertForm, EditConcertForm
 from django.contrib.auth.decorators import login_required
+from django import forms
 
 
 
@@ -41,13 +42,26 @@ class UserConcertListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         user = self.request.user
-        return Concert.objects.filter(attendees=user)
+        attended_concerts = user.attended_concerts.all()
+        all_concerts = Concert.objects.all()
+        concerts = all_concerts.exclude(id__in=attended_concerts.values_list('id', flat=True))
+        return concerts
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
         context['attended_concerts'] = user.attended_concerts.all()
         return context
+
+
+
+class CreateConcertForm(forms.ModelForm):
+    class Meta:
+        model = Concert
+        fields = ['title', 'artist', 'date', 'venue']
+        widgets = {
+            'date': DateInput(attrs={'type': 'date'}),
+        }
 
 class ConcertCreateView(LoginRequiredMixin, CreateView):
     model = Concert
@@ -129,7 +143,9 @@ class EditConcertView(LoginRequiredMixin, UpdateView):
     model = Concert
     form_class = EditConcertForm
     template_name = 'main_app/edit_concert.html'
-    success_url = reverse_lazy('user-concerts')
+
+    def get_success_url(self):
+        return reverse_lazy('user-concerts', kwargs={'user_id': self.request.user.id})
 
 
 def add_photo(request, concert_id):

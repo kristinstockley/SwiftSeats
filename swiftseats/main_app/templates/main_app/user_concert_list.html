@@ -13,10 +13,8 @@
           <p class="card-text">Artist: {{ concert.artist }}</p>
           <p class="card-text">Date: {{ concert.date }}</p>
           <p class="card-text">Venue: {{ concert.venue }}</p>
-          <div class="btn-group">
             <a href="{% url 'edit-concert' concert.id %}" class="btn btn-primary">Edit</a>
-            <a href="{% url 'concert-delete' concert.id %}" class="btn btn-primary" style="margin-left: 20px;">Delete Concert</a>
-          </div>
+            <a href="{% url 'concert-delete' concert.id %}" class="btn btn-primary">Delete Concert</a>
           <br>
           <div class="row">
             {% for photo in concert.photo_set.all %}

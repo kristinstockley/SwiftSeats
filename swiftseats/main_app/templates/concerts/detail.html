@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
   <h1>{{ concert.title }}</h1>
   <p>Artist: {{ concert.artist }}</p>
   <p>Date: {{ concert.date }}</p>
   <p>Venue: {{ concert.venue }}</p>
-  <p>Description: {{ concert.description }}</p>
-
+  <h2>Attendees:</h2>
+    {% for attendee in concert.attendees.all %}
+      <li>{{ attendee.username }}</li>
+    {% empty %}
+      <p>No attendees yet.</p>
+    {% endfor %}
+    <br>
   <div>
     <a href="{% url 'ticket-list' %}?concert_id={{ concert.id }}" class="btn btn-primary">View Tickets</a>
   </div>
@@ -14,10 +20,11 @@
   <div>
     <a href="{% url 'index' %}" class="btn btn-primary">Back to Concerts</a>
   </div>
+  <br>
   <div>
     <form method="post" action="{% url 'add-to-attended' concert.id %}">
       {% csrf_token %}
-      <button type="submit" class="btn btn-primary">Add to Attended</button>
+      <button type="submit" class="btn btn-primary">Add to Attended Concerts</button>
     </form>
   </div>
 {% endblock %}

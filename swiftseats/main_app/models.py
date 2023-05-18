@@ -7,7 +7,6 @@ class Concert(models.Model):
     artist = models.CharField(max_length=100)
     date = models.DateField()
     venue = models.CharField(max_length=100)
-    description = models.TextField(max_length=250)
     attendees = models.ManyToManyField(User, related_name='attended_concerts', blank=True)
 
     def __str__(self):
