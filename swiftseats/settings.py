@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-kbwahtlbv$tf63=z-=#rh=_kon^bhx0slo(zxp374zi(3r9u!o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://git.heroku.com/swiftseats.git']
 
 
 # Application definition
